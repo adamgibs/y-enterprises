@@ -70,8 +70,16 @@ public class MainPageDao extends AbstractJdbcDao{
 		String title = rs.getString("title");
 		String shortDescription = rs.getString("short_description");
 		String longDescription = rs.getString("long_description");
-		LocalDateTime lastModified = rs.getTimestamp("last_modified").toLocalDateTime();
-		User lastModifiedBy = this.getUser(rs.getString("last_modified_by"));
+		LocalDateTime lastModified = null;
+		if(rs.getTimestamp("last_modified") != null) {
+			lastModified = rs.getTimestamp("last_modified").toLocalDateTime();
+		};
+		
+		User lastModifiedBy = null;
+		if(rs.getString("last_modified_by") != null) {
+			lastModifiedBy = this.getUser(rs.getString("last_modified_by"));
+		};
+		
 		
 		Posting posting = new Posting();
 		posting.setId(id);
@@ -80,8 +88,13 @@ public class MainPageDao extends AbstractJdbcDao{
 		posting.setTitle(title);
 		posting.setShortDescription(shortDescription);
 		posting.setLongDescription(longDescription);
-		posting.setLastModified(lastModified);
-		posting.setLastModifiedBy(lastModifiedBy);
+		
+			posting.setLastModified(lastModified);
+		
+		
+			posting.setLastModifiedBy(lastModifiedBy);
+		
+		
 		
 		return posting;
 	}
@@ -91,7 +104,7 @@ public class MainPageDao extends AbstractJdbcDao{
 		String password = rs.getString("password");
 		String firstName = rs.getString("first_name");
 		String lastName = rs.getString("last_name");
-		LocalDate createdDate = rs.getDate("created_date").toLocalDate();
+		LocalDate createdDate = rs.getDate("create_date").toLocalDate();
 		
 		
 		User user = new User();
