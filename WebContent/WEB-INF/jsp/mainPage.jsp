@@ -9,40 +9,43 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="content">
-				<%
-					List<Posting> postings = (List)request.getAttribute("postings");
-					if(postings == null || postings.isEmpty()){
-				%>
-						
-						Nothing Found 
-					
-				<%	
-					}else{
-				%>
-					<table>
-						
-				<%
-						for(Posting posting : postings){
-				%>
-					<tr>
-						<td><%=posting.getCreatedDate() %></td>
-						<td><%=posting.getTitle() %></td>
-						<td><%=posting.getShortDescription() %></td>
-						<td>
-							<a href='details?id=<%=posting.getId()%>'>Read more...</a>
+	<div id="container">
+	<%@ include file="include/headerNotLoggedIn.jsp" %>
+		<div id="content">
+					<%
+						List<Posting> postings = (List)request.getAttribute("postings");
+						if(postings == null || postings.isEmpty()){
+					%>
 							
-						</td>
-					</tr>
+							Nothing Found 
 						
-				
-				<%			
-						};
-				%>
-					</table>
-				<%
-					}
-				%>
+					<%	
+						}else{
+					%>
+						<table>
+							
+					<%
+							for(Posting posting : postings){
+					%>
+						<tr>
+							<td><%=posting.getCreatedDate() %></td>
+							<td><%=posting.getTitle() %></td>
+							<td><%=posting.getShortDescription() %></td>
+							<td>
+								<a href='details?id=<%=posting.getId()%>'>Read more...</a>
+								
+							</td>
+						</tr>
+							
+					
+					<%			
+							};
+					%>
+						</table>
+					<%
+						}
+					%>
+				</div>
 			</div>
 </body>
 </html>

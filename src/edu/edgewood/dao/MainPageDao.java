@@ -38,7 +38,7 @@ public class MainPageDao extends AbstractJdbcDao{
 		}
 	}
 	
-	public User getUser(String id) throws Exception {
+	public User getUserById(String id) throws Exception {
 		String sql = "select * from user where id = ?";	
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -63,10 +63,37 @@ public class MainPageDao extends AbstractJdbcDao{
 		}
 		
 	}
+	
+	public User getUserByLogin(String userName, String password) throws Exception{
+		String sql = "select * from user where user_name = ? and password = ?";	
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, userName);
+			stmt.setString(2, password);
+			rs = stmt.executeQuery();
+			
+			
+			if(rs.next()) {
+				return createUser(rs);
+			}
+			return null;
+			
+			
+			
+		}finally {
+			releaseResources(conn, stmt, rs);
+		}
+	}
+	
 	private Posting createPosting(ResultSet rs) throws Exception{
 		String id = rs.getString("id");
 		LocalDate createdDate = rs.getDate("created_date").toLocalDate();
-		User createdBy = this.getUser(rs.getString("created_by"));
+		User createdBy = this.getUserById(rs.getString("created_by"));
 		String title = rs.getString("title");
 		String shortDescription = rs.getString("short_description");
 		String longDescription = rs.getString("long_description");
@@ -77,7 +104,7 @@ public class MainPageDao extends AbstractJdbcDao{
 		
 		User lastModifiedBy = null;
 		if(rs.getString("last_modified_by") != null) {
-			lastModifiedBy = this.getUser(rs.getString("last_modified_by"));
+			lastModifiedBy = this.getUserById(rs.getString("last_modified_by"));
 		};
 		
 		
