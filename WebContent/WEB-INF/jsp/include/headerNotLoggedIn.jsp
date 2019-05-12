@@ -1,3 +1,3 @@
 <div id="header">
-	<a id="loginLnkId" href="">Login</a>
+	<a id="loginLnkId" href="login">Login</a>
 </div>
