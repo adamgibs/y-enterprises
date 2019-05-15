@@ -12,6 +12,7 @@
 	<div id="container">
 	<div id="header">
 		<a id="loginLnkId" href="login">Login</a>
+		<a id="registerLnkId" href="register">Register</a>
 	</div>
 	
 		<div id="content">

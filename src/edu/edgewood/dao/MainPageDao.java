@@ -65,7 +65,7 @@ public class MainPageDao extends AbstractJdbcDao{
 	}
 	
 	public User getUserByLogin(String userName, String password) throws Exception{
-		String sql = "select * from user where user_name = ? and password = ?";	
+		String sql = "select * from user where id = ? and password = ?";	
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;

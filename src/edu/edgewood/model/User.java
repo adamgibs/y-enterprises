@@ -10,6 +10,16 @@ public class User {
 	String lastName;
 	LocalDate createdDate;
 	
+	public User() {};
+	
+	public User(String userId, String password, String firstName, String lastName) {
+		this.userId = userId;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		
+		createdDate = LocalDate.now();
+	}
 
 	public void setUserId(String userId) {
 		this.userId = userId;
