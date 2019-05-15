@@ -6,11 +6,14 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+
 </head>
 <body>
 	<div id="container">
-	<%@ include file="include/headerNotLoggedIn.jsp" %>
+	<div id="header">
+		<a id="loginLnkId" href="login">Login</a>
+	</div>
+	
 		<div id="content">
 					<%
 						List<Posting> postings = (List)request.getAttribute("postings");
